@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js",
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {

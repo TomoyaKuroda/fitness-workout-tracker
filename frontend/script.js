@@ -55,9 +55,7 @@ async function login() {
     } else {
         token = data.token; // Store the token
         localStorage.setItem('token', token); // Save token to localStorage
-        alert('Login successful!');
-        await fetchExercises(); // Fetch exercises after successful login
-        await listWorkouts(); // List workouts after successful login
+        window.location.href = 'dashboard.html';
     }
 }
 
@@ -294,15 +292,3 @@ async function deleteWorkout(id) {
         await listWorkouts(); // Refresh the workout list after deletion
     }
 }
-// On dashboard page load, check for token and fetch exercises
-window.onload = async () => {
-
-    token = localStorage.getItem('token'); // Retrieve token from localStorage
-    if (!token) {
-        alert('You need to log in first!');
-        window.location.href = 'index.html'; // Redirect to login page if not logged in
-    } else {
-        await fetchExercises(); // Fetch exercises for the workout creation
-        await listWorkouts(); // List workouts on load
-    }
-};
