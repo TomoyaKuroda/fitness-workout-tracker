@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { Op } = require('sequelize');
 const { body, validationResult } = require('express-validator');
-const sequelize = require('./config/database');
-const User = require('./models/User');
-const Exercise = require('./models/Exercise');
-const Workout = require('./models/Workout');
-const WorkoutExercise = require('./models/WorkoutExercise');
+const sequelize = require('../config/database');
+const User = require('../models/User');
+const Exercise = require('../models/Exercise');
+const Workout = require('../models/Workout');
+const WorkoutExercise = require('../models/WorkoutExercise');
 
 const app = express();
 app.use(bodyParser.json());

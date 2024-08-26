@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app, startServer } = require('../server');
+const { app, startServer } = require('../api/index');
 const sequelize = require('../config/database');
 
 let token;
@@ -85,7 +85,7 @@ describe('API Tests', () => {
       const response = await request(server)
         .put(`/api/workouts/${workoutId}`)
         .set('Authorization', token)
-        .send({ comments: 'Updated leg day' });
+        .send({ comments: 'Updated leg day', exercises: [{ exercise_id: 1, sets: 3, repetitions: 10, weight: 50 }] });
       expect(response.statusCode).toBe(200);
       expect(response.body.comments).toBe('Updated leg day');
     });
@@ -122,7 +122,7 @@ describe('API Tests', () => {
       const response = await request(server)
         .put(`/api/workouts/${workoutId}`)
         .set('Authorization', token)
-        .send({ scheduled_time: scheduledTime });
+        .send({ scheduled_time: scheduledTime, exercises: [{ exercise_id: 1, sets: 3, repetitions: 10, weight: 50 }] });
       expect(response.statusCode).toBe(200);
       
       const updatedWorkout = response.body;
