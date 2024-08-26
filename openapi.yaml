@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: Workout Tracker API
+  version: 1.0.0
+paths:
+  /api/signup:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  minLength: 6
+                email:
+                  type: string
+                  format: email
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: Validation error
+
+  /api/login:
+    post:
+      summary: Log in a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Invalid credentials
+
+  /api/exercises:
+    post:
+      summary: Create a new exercise
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                category:
+                  type: string
+                muscle_group:
+                  type: string
+      responses:
+        '201':
+          description: Exercise created
+        '400':
+          description: Validation error
+
+  /api/workouts:
+    post:
+      summary: Create a new workout
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                comments:
+                  type: string
+                exercises:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      exercise_id:
+                        type: integer
+                      sets:
+                        type: integer
+                      repetitions:
+                        type: integer
+                      weight:
+                        type: number
+      responses:
+        '201':
+          description: Workout created
+        '400':
+          description: Validation error
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

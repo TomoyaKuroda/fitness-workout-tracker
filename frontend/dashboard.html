@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Workout Tracker - Dashboard</h1>
+        <div id="error-message" class="error-message"></div> <!-- Error message display -->
+
+        <div class="form-section" id="exercise">
+            <h2>Create Exercise</h2>
+            <input type="text" id="exercise-name" placeholder="Exercise Name" required>
+            <input type="text" id="exercise-description" placeholder="Description">
+            <input type="text" id="exercise-category" placeholder="Category">
+            <input type="text" id="exercise-muscle-group" placeholder="Muscle Group">
+            <button type="button" onclick="createExercise()">Create Exercise</button>
+        </div>
+
+        <div class="form-section" id="workout">
+            <h2>Create Workout</h2>
+            <input type="datetime-local" id="workout-date" required>
+            <input type="text" id="workout-comments" placeholder="Comments">
+            <input type="datetime-local" id="scheduled_time" required> <!-- Added scheduled_time field -->
+            <select id="workout-exercises" multiple required></select> <!-- Dropdown for exercises -->
+            <button type="button" onclick="createWorkout()">Create Workout</button>
+        </div>
+
+        <div class="form-section" id="workout-list">
+            <h2>Your Workouts</h2>
+            <button type="button" onclick="listWorkouts()">List Workouts</button>
+            <ul id="workouts"></ul>
+        </div>
+
+        <div class="form-section" id="update-workout" style="display: none;">
+            <h2>Update Workout</h2>
+            <input type="hidden" id="update-workout-id"> <!-- Hidden field to store workout ID -->
+            <input type="datetime-local" id="update-scheduled_time" required> <!-- Added scheduled_time field -->
+            <input type="text" id="update-workout-comments" placeholder="Comments">
+            <select id="update-workout-exercises" multiple required></select> <!-- Dropdown for exercises -->
+            <button type="button" onclick="updateWorkout()">Update Workout</button>
+        </div>
+
+				<div class="form-section" id="report">
+						<h2>Generate Reports</h2>
+						<button type="button" onclick="generateReport()">Generate Report</button>
+						<pre id="report-output"></pre>
+				</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
